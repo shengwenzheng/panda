@@ -15,7 +15,7 @@ type Server struct {
 	engine *gin.Engine
 }
 
-func NewServer(port int, service *service.Service) *Server {
+func New(port int, service *service.Service) *Server {
 	server := &Server{
 		port:   port,
 		engine: gin.Default(),
