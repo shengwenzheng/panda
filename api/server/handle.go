@@ -71,10 +71,9 @@ func handleError() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Next()
 		err := c.Errors.Last();
-		if err != nil  {
+		if err == nil  {
 			return 
 		}
-
 		slog.Error("handle error", "error", err.Err, "url", c.Request.URL)
 		msg := err.Err.Error()
 		code := getErrorCode(err.Err, service.ErrorCode);

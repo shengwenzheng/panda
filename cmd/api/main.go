@@ -29,16 +29,11 @@ func main() {
 	app := &cli.App{
 		Name:  "panda-api",
 		Usage: "Panda API Server",
-		Flags: []cli.Flag{
-			&cli.IntFlag{
-				Name:    "port",
-				Aliases: []string{"p"},
-				Value:   8080,
-				Usage:   "Port to run the server on",
-			},
-		},
 		Action: exec,
 		Version: version.String(),
+		Flags: []cli.Flag{
+			configPathFlag,
+		},
 	}
 
 	if err := app.Run(os.Args); err != nil {
@@ -62,7 +57,7 @@ func exec(ctx *cli.Context) error {
 
 	server.New(
 		cfg.Port,
-		service.NewService(db),
+		service.New(db),
 	).Run()
 	return nil
 }

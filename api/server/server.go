@@ -53,7 +53,7 @@ func (s *Server) registerRoutes(service *service.Service) {
 func (s *Server) Run() {
 	fmt.Println("server running on port", s.port)
 	if err := s.engine.Run(fmt.Sprintf(":%d", s.port)); err != nil {
-		slog.Error("server run error", err)
+		slog.Error("server run error", "error", err)
 		os.Exit(1)
 	}
 }
