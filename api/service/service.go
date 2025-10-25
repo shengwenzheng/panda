@@ -19,8 +19,18 @@ type pingRes struct {
 	Pong string `json:"pong"`
 }
 
+type swzRes struct {
+	Swz string `json:"swz"`
+}
+
 func (s *Service) Ping(_ *gin.Context) (*pingRes, error) {
 	return &pingRes{
 		Pong: "pong",
+	}, nil
+}
+
+func (s *Service) Swz(_ *gin.Context) (*swzRes, error) {
+	return &swzRes{
+		Swz: "这是一段数据.........",
 	}, nil
 }

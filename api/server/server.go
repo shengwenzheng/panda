@@ -48,6 +48,7 @@ func (s *Server) registerRoutes(service *service.Service) {
 	g := s.engine.Group("/api")
 
 	g.GET("ping", s.handle(service.Ping))
+	g.GET("users", s.handle(service.Swz))
 }
 
 func (s *Server) Run() {

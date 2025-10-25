@@ -24,7 +24,7 @@ type handleFunc any
 
 type Response struct {
 	Code int 	   `json:"code"`
-	Msg  string     `json:"msg"`
+	Msg  string    `json:"msg"`
 	Data any	   `json:"data,omitempty"` // omitempty表示如果Data为空则不返回该字段
 }
 
@@ -33,7 +33,6 @@ func (s *Server) handle(fn handleFunc) gin.HandlerFunc {
 		slog.Error("invalid handler func", "error", err)
 		panic(err)
 	}
-
 	return func(c *gin.Context) {
 		ft := reflect.TypeOf(fn)
 		args, err := buildParams(ft, c)
@@ -41,13 +40,11 @@ func (s *Server) handle(fn handleFunc) gin.HandlerFunc {
 			c.Error(err)
 			return
 		}
-
 		result := callHandleFunc(fn, args...)
 		if err := result[len(result)-1]; err != nil {
 			c.Error(err.(error))
 			return
 		}
-
 		if ft.In(ft.NumIn()-1) == paginationType {
 			r := result[0].(*pagination.Result)
 			query := args[len(args)-1].(*pagination.Query)
@@ -77,6 +74,7 @@ func handleError() gin.HandlerFunc {
 		slog.Error("handle error", "error", err.Err, "url", c.Request.URL)
 		msg := err.Err.Error()
 		code := getErrorCode(err.Err, service.ErrorCode);
+		fmt.Println(code)
 		if code == -1 {
 			msg = "request failed"
 		}
@@ -138,7 +136,6 @@ func buildParams(ft reflect.Type,ctx *gin.Context) ([]any, error) {
 
 		args = append(args, query)
 	}
-
 	return args, nil
 }
 
