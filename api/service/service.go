@@ -30,7 +30,9 @@ func (s *Service) Ping(_ *gin.Context) (*pingRes, error) {
 }
 
 func (s *Service) Swz(_ *gin.Context) (*swzRes, error) {
+	// idstr := c.Query("id")
+	// fmt.Println(idstr)
 	return &swzRes{
-		Swz: "这是一段数据.........",
+		Swz: "xixihaha",
 	}, nil
 }
