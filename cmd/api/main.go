@@ -9,7 +9,7 @@ import (
 
 	"panda.com/api/service"
 	"panda.com/api/server"
-	version "panda.com/cmd"
+	version "panda.com/cmd" // 别名导入
 	"panda.com/config"
 	"panda.com/database/mysql"
 )
@@ -30,7 +30,7 @@ func main() {
 		Name:  "panda-api",
 		Usage: "Panda API Server",
 		Action: exec,
-		Version: version.String(),
+		Version: version.String(), 
 		Flags: []cli.Flag{
 			configPathFlag,
 		},
