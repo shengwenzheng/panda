@@ -5,15 +5,27 @@ CMD := cmd/api/main.go
 CONFIG ?= config/config_test.yaml
 
 GORUN := go run
+GOBUILD := go build
 GOFMT := gofmt -s -w
 
-.PHONY: all run fmt vet clean
+.PHONY: all run build fmt vet clean
 
 all: run
 
 run:
-    @echo "Running $(CMD) with config: $(CONFIG)"
-    $(GORUN) $(CMD) --config-file=$(CONFIG)
+	@echo "Running $(CMD) with config: $(CONFIG)"
+	$(GORUN) $(CMD) --config-file=$(CONFIG)
+
+build:
+	@echo "Build binary..."
+	@mkdir -p bin
+	$(GOBUILD) -o bin/staker-api ./cmd/api
+	@echo "Built bin/staker-api"
+
+start: build
+	@echo "Starting bin/staker-api with config: $(CONFIG)"
+	./bin/staker-api --config-file=$(CONFIG)
+
 
 fmt:
 	@echo "Formatting..."
