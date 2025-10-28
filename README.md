@@ -6,6 +6,11 @@ To run this project:
 make
 ```
 
+to run by handle
+```sh 
+go run cmd/api/main.go --config-file=config/config_test.yaml
+```
+
 ### Compile
 
 手动编译二进制包
