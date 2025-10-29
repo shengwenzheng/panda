@@ -5,7 +5,7 @@ type connect struct {
 	Port     int    `yaml:"port"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
-	DBName   string `yaml:"database"`
+	DBName   string `yaml:"db_name"`
 }
 type Config struct {
 	Master connect `yaml:"master"`
